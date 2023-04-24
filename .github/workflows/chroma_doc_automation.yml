@@ -35,7 +35,7 @@ jobs:
           path: docs/
           
       - name: Create PR
-        uses: actions/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.SECRET_TOKEN }}
           title: "Copy index.ts from Chroma to ChromaDocTest"
@@ -43,4 +43,5 @@ jobs:
           branch: "copy-index-ts-to-chromaDocTest" # Changed to a new branch name
           base: main
           labels: "auto-generated"
+
 
