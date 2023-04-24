@@ -40,6 +40,7 @@ jobs:
           token: ${{ secrets.SECRET_TOKEN }}
           title: "Copy index.ts from Chroma to ChromaDocTest"
           body: "This PR copies the `index.ts` file from the `naynaly10/chroma` repository to the `naynaly10/chromaDocTest` repository."
-          branch: main
+          branch: "copy-index-ts-to-chromaDocTest" # Changed to a new branch name
           base: main
           labels: "auto-generated"
+
