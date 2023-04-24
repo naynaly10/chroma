@@ -34,16 +34,13 @@ jobs:
           name: index.ts
           path: docs/
           
-      - name: Commit changes
-        run: |
-          git config --local user.email "your-email@example.com"
-          git config --local user.name "Your Name"
-          git add docs/index.ts
-          git commit -m "Copy index.ts from Chroma to ChromaDocTest"
-      
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SECRET_TOKEN }}
+          commit-message: "Copy index.ts from Chroma to ChromaDocTest"
           branch: main
-          force: true
+          base: main
+          title: "Copy index.ts from Chroma to ChromaDocTest"
+          body: "This PR copies the `index.ts` file from the `naynaly10/chroma` repository to the `naynaly10/chromaDocTest` repository."
+          labels: "auto-generated"
