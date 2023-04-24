@@ -35,12 +35,11 @@ jobs:
           path: docs/
           
       - name: Create PR
-        uses: peter-evans/create-pull-request@v3
+        uses: actions/create-pull-request@v3
         with:
           token: ${{ secrets.SECRET_TOKEN }}
-          commit-message: "Copy index.ts from Chroma to ChromaDocTest"
-          branch: main
-          base: main
           title: "Copy index.ts from Chroma to ChromaDocTest"
           body: "This PR copies the `index.ts` file from the `naynaly10/chroma` repository to the `naynaly10/chromaDocTest` repository."
+          branch: main
+          base: main
           labels: "auto-generated"
