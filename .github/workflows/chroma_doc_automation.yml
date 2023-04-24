@@ -1,0 +1,48 @@
+name: Copy Index from Chroma to ChromaDocTest
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  copy-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Retrieve index.ts as artifact
+        run: |
+          mkdir docs
+          cp clients/js/src/index.ts docs/
+        
+      - name: Upload index.ts artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: index.ts
+          path: docs/index.ts
+          
+      - name: Checkout code of ChromaDocTest repo
+        uses: actions/checkout@v2
+        with:
+          repository: naynaly10/chromaDocTest
+          
+      - name: Download index.ts artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: index.ts
+          path: docs/
+          
+      - name: Commit changes
+        run: |
+          git config --local user.email "your-email@example.com"
+          git config --local user.name "Your Name"
+          git add docs/index.ts
+          git commit -m "Copy index.ts from Chroma to ChromaDocTest"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
